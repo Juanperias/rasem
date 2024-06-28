@@ -1,7 +1,7 @@
 RUST = cargo
 RUST_FLAGS = rustc -- --emit=obj -g -C link-args=-no-pie -C relocation-model=static
 ASM = nasm
-KERNEL_BUILD = target/rasem_x86_64/debug/deps
+KERNEL_BUILD = target/rasem_x86/debug/deps
 KERNEL_TARGET = base
 FINAL_KERNEL = kernel
 BOOTLOADER = boot
