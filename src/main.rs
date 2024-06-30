@@ -6,11 +6,13 @@ use core::panic::PanicInfo;
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     let vga_buffer = 0xb8000 as *mut u8;
-    let target = vga_buffer.wrapping_add(0);
+    let message = b"Hello in rust!";
 
-    unsafe {
-        *target = b'!';
-        *target.offset(1) = 0xb;
+    for (i, &byte) in message.iter().enumerate() {
+        unsafe {
+            *vga_buffer.offset(i as isize * 2) = byte;
+            *vga_buffer.offset(i as isize * 2 + 1) = 0xc;
+        }
     }
 
     loop {}

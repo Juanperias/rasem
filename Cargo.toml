@@ -8,6 +8,9 @@ edition = "2021"
 
 [profile.dev]
 panic = "abort"
+opt-level = 1
+overflow-checks = false
 
 [profile.release]
 panic = "abort"
+

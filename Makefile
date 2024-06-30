@@ -1,7 +1,6 @@
 RUST = cargo
-RUST_FLAGS = rustc -- --emit=obj -g -C link-args=-no-pie -C relocation-model=static
+RUST_FLAGS = rustc -- --emit=asm -o kernel_build/base.s -L ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib  -g -C link-args=-no-pie -C relocation-model=static
 ASM = nasm
-
 
 KERNEL_BUILD = target/rasem_x86/debug/deps
 KERNEL_TARGET = base
@@ -17,22 +16,30 @@ ASM_ELF_FLAGS := -f elf -o
 DIST_FOLDER = binaries
 OS_TARGET = rasem
 CREATE_FOLDER = mkdir
-COPY_FOLDER = cp
+COPY = cp
 DELETE_FOLDER := rm -r
+CLANG = clang
+CLANG_FLAGS := -m32 -c -o
 
+
+KERNEL_DIST_FOLDER = kernel_build
 
 build:
 	$(CREATE_FOLDER) $(DIST_FOLDER)
+	$(CREATE_FOLDER) $(KERNEL_DIST_FOLDER)
 
 	$(RUST) $(RUST_FLAGS)
 
-	$(COPY_FOLDER) $(KERNEL_BUILD)/*.o $(DIST_FOLDER)/$(KERNEL_TARGET).o
-	
+	$(COPY) $(KERNEL_DIST_FOLDER)/*.s $(DIST_FOLDER)/$(KERNEL_TARGET).s
+	$(CLANG) $(CLANG_FLAGS) $(DIST_FOLDER)/$(KERNEL_TARGET).o $(DIST_FOLDER)/$(KERNEL_TARGET).s
+
 	$(ASM) $(BOOTLOADER).asm $(ASM_BIN_FLAGS) $(DIST_FOLDER)/$(BOOTLOADER).bin 
 	$(ASM) $(KERNEL_ENTRY).asm $(ASM_ELF_FLAGS) $(DIST_FOLDER)/$(KERNEL_ENTRY).o
 	$(ASM) $(ZEROES).asm $(ASM_BIN_FLAGS) $(DIST_FOLDER)/$(ZEROES).bin
+	
 
-	$(LD) -o $(DIST_FOLDER)/$(FINAL_KERNEL).bin -Ttext 0x1000 $(DIST_FOLDER)/$(KERNEL_ENTRY).o $(DIST_FOLDER)/$(KERNEL_TARGET).o --oformat binary
+	$(LD) --no-pie -o $(DIST_FOLDER)/$(FINAL_KERNEL).bin -Ttext 0x1000 $(DIST_FOLDER)/$(KERNEL_ENTRY).o $(DIST_FOLDER)/$(KERNEL_TARGET).o --oformat binary
 	cat $(DIST_FOLDER)/$(BOOTLOADER).bin $(DIST_FOLDER)/$(FINAL_KERNEL).bin $(DIST_FOLDER)/$(ZEROES).bin > $(DIST_FOLDER)/$(OS_TARGET).bin
 clean:
 	$(DELETE_FOLDER) $(DIST_FOLDER)
+	$(DELETE_FOLDER) $(KERNEL_DIST_FOLDER)

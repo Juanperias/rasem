@@ -23,8 +23,10 @@ chmod +x run.sh
 ./run.sh
 </code>
 
-once it has been compiled you can run the following command (you must have qemu installed on your computer)
+also to compile the assembly provided by rust you must have clang installed.
 
-<code>qemu-system-x86_64 -drive format=raw,file="binaries/rasem.bin",index=0,if=floppy, -m 128M</code>
+<code>sudo pacman -S clang</code>
+
+now in this version the qemu command to create the vm is already included in run.sh
 
 In case everything went well you will see a blue exclamation mark, if there was an error open an issue on github and I will help you with your error.

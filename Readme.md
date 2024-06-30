@@ -6,6 +6,10 @@
 ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white)
 
+# What's new?
+
+In the first version of rasem the core library was not included, in this version of rasem the core library is included so you can do everything you need to create an os in rust.
+
 # What is rasem?
 
 Rasem is cross compiler for assembly and rust, with rasem you can program the bootloader in assembly and the kernel in rust, remember that the rust code is rust in no std and no main, besides you will use a target that compiles to x86 that is to 32 bits.
