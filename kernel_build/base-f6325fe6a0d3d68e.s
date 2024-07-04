@@ -8,7 +8,7 @@ _start:
 .Lfunc_begin0:
 	.cfi_sections .debug_frame
 	.cfi_startproc
-	.file	1 "/home/juan/Documents/Projects/rasem" "src/main.rs"
+	.file	1 "/home/juan/Documents/GitHub/rasem" "src/main.rs"
 	.loc	1 13 13 prologue_end
 	movb	$72, 753664
 	.loc	1 14 13
@@ -1707,7 +1707,7 @@ rust_begin_unwind:
 .Linfo_string1:
 	.asciz	"src/main.rs/@/0ob8igcdxksavc2i7iyd41hv1"
 .Linfo_string2:
-	.asciz	"/home/juan/Documents/Projects/rasem"
+	.asciz	"/home/juan/Documents/GitHub/rasem"
 .Linfo_string3:
 	.asciz	"core"
 .Linfo_string4:

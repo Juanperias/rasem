@@ -1,3 +1,4 @@
 /target
 .git/
 binaries/
+kernel_build/
