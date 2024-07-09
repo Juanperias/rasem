@@ -1,25 +1,59 @@
 # Rasem
 
-## (Rust + assembly)
+## (ASSEMBLY + RUST)
 
-![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
-![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
-![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white)
+rasem is a **cross compiler** that allows you to make your operating system using assembler and rust, the **bootloader** and other parts can be made in assembler and the kernel can be made in rust.
 
-# What's new?
+## Docs
 
-In the first version of rasem the core library was not included, in this version of rasem the core library is included so you can do everything you need to create an os in rust.
+In the new version of rasem V2, you have a cli that improves the development experience.
 
-# What is rasem?
+### Creating a project
 
-Rasem is cross compiler for assembly and rust, with rasem you can program the bootloader in assembly and the kernel in rust, remember that the rust code is rust in no std and no main, besides you will use a target that compiles to x86 that is to 32 bits.
+to create a project you run
 
-# How to install rasem
+```bash
+rasem new <project-name>
+```
 
-Installing rasem is a long story and I recommend you to go to the INSTALL.md which contains the steps (for arch linux)
+### Build a project
 
-# History of rasem
+to compile your project you just do
 
-The truth is that I find the story of rasem interesting, it all starts because I wanted to make a bootloader, and I found it very difficult assembly because I did not dominate it and I said hey why not use C and asm, but I remembered that I am not an expert in C and only know the basics so I started the rasem project a cross compiler that has a boot loader in asm and a kernel in rust, and if you are reading this is because I managed to make rasem.
+to see the commands that are running you use
 
-## By juanperias
+```bash
+rasem build --verbose
+rasem build -v
+```
+
+to do build and then run the os is
+
+```bash
+rasem build --run
+rasem build -r
+```
+
+## How to install
+
+Installing rasem is easy (if you use arch linux) you just need to run the install-arch script.
+
+At some point I will create a script for installation on debian.
+
+For now you can install it manually.
+
+Requirements for manual installation:
+
+1.  nasm
+2.  rust
+3.  clang
+4.  i386-elf-ld in case in [debian can be easily installed](https://github.com/mell-o-tron/MellOs/blob/main/A_Setup/setup-gcc-debian.sh)
+5.  git
+
+after you have everything installed you should run the following commands
+
+```bash
+git clone https://github.com/Juanperias/rasem.git
+cd rasem
+cargo install rasem --path .
+```

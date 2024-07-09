@@ -1,24 +1,12 @@
-#![no_std]
-#![no_main]
+mod cli;
+mod commands;
+mod utils;
+use anyhow::Result;
+use cli::get_cli;
 
-use core::panic::PanicInfo;
+fn main() -> Result<()> {
+    let cli = get_cli();
+    cli.commands.run()?;
 
-#[no_mangle]
-pub extern "C" fn _start() -> ! {
-    let vga_buffer = 0xb8000 as *mut u8;
-    let message = b"Hello in rust!";
-
-    for (i, &byte) in message.iter().enumerate() {
-        unsafe {
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xc;
-        }
-    }
-
-    loop {}
-}
-
-#[panic_handler]
-fn panic(panic: &PanicInfo) -> ! {
-    loop {}
+    Ok(())
 }
