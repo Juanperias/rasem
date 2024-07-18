@@ -4,6 +4,10 @@
 
 rasem is a **cross compiler** that allows you to make your operating system using assembler and rust, the **bootloader** and other parts can be made in assembler and the kernel can be made in rust.
 
+## Docs
+
+In the new version of rasem V2, you have a cli that improves the development experience.
+
 ### Creating a project
 
 to create a project you run
@@ -16,11 +20,9 @@ rasem new <project-name>
 
 to compile your project you just do
 
-to see the commands that are running you use
-
 ```bash
-rasem build --verbose
-rasem build -v
+rasem build
+
 ```
 
 to do build and then run the os is

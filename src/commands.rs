@@ -1,5 +1,8 @@
+mod add;
 mod build;
 mod new;
+mod remove;
+mod version;
 
 use anyhow::Result;
 use clap::Subcommand;
@@ -11,10 +14,15 @@ pub enum Commands {
     },
     Build {
         #[clap(short, long)]
-        verbose: bool,
-        #[clap(short, long)]
         run: bool,
     },
+    Add {
+        module: String,
+    },
+    Remove {
+        module: String,
+    },
+    Version {},
 }
 
 impl Commands {
@@ -23,8 +31,17 @@ impl Commands {
             Commands::New { name } => {
                 new::new_command(name.to_owned())?;
             }
-            Commands::Build { verbose, run } => {
-                build::build_command(verbose.to_owned(), run.to_owned())?;
+            Commands::Build { run } => {
+                build::build_command(run.to_owned())?;
+            }
+            Commands::Add { module } => {
+                add::add_command(module.to_owned())?;
+            }
+            Commands::Remove { module } => {
+                remove::remove_command(module.to_owned())?;
+            }
+            Commands::Version {} => {
+                version::version_command();
             }
         }
 

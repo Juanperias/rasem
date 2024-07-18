@@ -1,10 +1,11 @@
 [package]
 name = "rasem"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 
 [dependencies]
 anyhow = "1.0.86"
 clap = { version = "4.5.8", features = ["derive"] }
+colored = "2.1.0"
 serde = { version = "1.0.204", features = ["derive"] }
 toml = "0.8.14"
